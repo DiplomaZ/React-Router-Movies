@@ -3,36 +3,27 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const MovieList = props => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    const getMovies = () => {
-      axios
-        .get("http://localhost:5000/api/movies")
-        .then(response => {
-          setMovies(response.data);
-        })
-        .catch(error => {
-          console.error("Server Error", error);
-        });
-    };
-
-    getMovies();
-  }, []);
-
   return (
     <div className="movie-list">
-      {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
+      {props.movies.map(movie => (
+        <MovieDetails {...props} key={movie.id} movie={movie} />
       ))}
     </div>
   );
 };
 
-function MovieDetails({ movie }) {
-  const { title, director, metascore, stars, id } = movie;
-  console.log(movie);
+function MovieDetails(props) {
+  const { title, director, metascore, stars, id } = props.movie;
+
+  function goToDetails() {
+    console.log("you clicked it");
+    props.history.push(`/movies/${id}`);
+    //we could have also put this in an anonymous function.... this just looks cleaner to me
+  }
+
+  console.log(props);
   return (
-    <Link to={`/movies/${id}`}>
+    <div onClick={goToDetails}>
       <div className="movie-card">
         <h2>{title}</h2>
         <div className="movie-director">
@@ -49,7 +40,7 @@ function MovieDetails({ movie }) {
           </div>
         ))}
       </div>
-    </Link>
+    </div>
   );
 }
 
