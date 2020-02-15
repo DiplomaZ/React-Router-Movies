@@ -10,9 +10,9 @@ const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [blankRefresher, setBlankRefresher] = useState(false);
 
-  const addToSavedList = movie => {
-    setSavedList([...savedList, movie]);
-  };
+  // const addToSavedList = movie => {
+  //   setSavedList([...savedList, movie]);
+  // };
 
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -29,11 +29,16 @@ const App = () => {
     };
 
     getMovies();
-  }, [blankRefresher]);
+  }, []);
 
   return (
     <div>
-      <SavedList list={savedList} />
+      <Route
+        path="/"
+        render={props => {
+          return <SavedList {...props} list={savedList} />;
+        }}
+      />
       <Route
         exact
         path="/"

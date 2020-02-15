@@ -7,9 +7,13 @@ const SavedList = props => (
     {props.list.map(movie => (
       <span className="saved-movie">{movie.title}</span>
     ))}
-    <Link to="/">
+    <div
+      onClick={() => {
+        props.history.push("/");
+      }}
+    >
       <div className="home-button">home</div>
-    </Link>
+    </div>
   </div>
 );
 

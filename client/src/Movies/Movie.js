@@ -6,7 +6,6 @@ const Movie = props => {
 
   useEffect(() => {
     const id = props.match.params.id;
-    console.log("WE SETTIN ", props);
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
     setMovie(props.movies[id]); //set it to the incoming associated array index being th eID
@@ -20,7 +19,7 @@ const Movie = props => {
 
   if (!movie) {
     console.log("Never should have come here");
-    props.setBlankRefresher(true);
+    //props.setBlankRefresher(true);
     return <div>Loading movie information...</div>;
   }
   const { title, director, metascore, stars } = movie;
